@@ -1,0 +1,369 @@
+@import "css/fonts"
+@import "css/reset"
+@import "css/vars"
+@import "css/mixins"
+
+html, body
+	width: 100%
+	height: 100%
+	font-size: 100%
+	text-size-adjust: 100%
+
+body
+	font-family: $LatoFont
+
+.no-display
+	display: none
+
+.wrapper
+	width: 1400px
+	margin: 0 auto
+
+
+.header-wrap
+	position: relative
+	top: 0
+	right: 0
+	left: 0
+	z-index: 2
+
+
+// header
+.header
+	position: relative
+	
+	&__menu-expand, &__menu-bar-expand, &__menu-search
+		display: none
+		box-sizing: border-box
+
+		&__menu-bar-expand
+			position: relative
+
+			&:after
+				content: ' '
+				position: absolute
+				display: block
+				top: 50%
+				right: 5px
+				left: auto
+				width: 0
+				height: 0
+				margin-top: -3px
+
+				border-left: 5px solid transparent
+				border-right: 5px solid transparent
+				
+				border-top: 5px solid #094798
+
+			// active state
+			&.active:after
+				border-top: none
+				border-bottom: 5px solid #094798
+
+	
+	.wrapper
+		@include clearfix()
+//EO header
+
+//Top menu bar
+.menu-bar
+
+	background-color: transparent
+	padding: emCalc(30) 0 0
+
+	.wrapper
+		display: table
+
+	&__item
+		position: relative
+		display: table-cell
+
+		text-align: center
+		vertical-align: middle
+		color: $menu-font-color
+
+		&--nest
+			padding: emCalc(30) 0 emCalc(30)
+			cursor: pointer
+
+		&__icon
+			display: inline-block
+
+			&--logo
+				background: url('../images/icons/logo.png')
+				background-size: contain
+				width: 303px
+				height: 124px
+
+			&--loupe
+				background: url('../images/icons/loupe.png') no-repeat
+				background-size: contain
+				width: 18px
+				height: 18px	
+
+		&__value
+			position: relative
+			
+			font-family: $LatoFont
+			font-size: emCalc(24)
+
+			&__icon
+				display: inline-block
+				margin-right: emCalc(6, 36)
+
+//EO menu bar
+
+//Slider
+.slider
+	position: relative
+	max-height: emCalc(860)
+	overflow: hidden
+	margin-top: emCalc(-157)
+
+	&__list
+		&__item
+			position: relative
+
+			&__content
+				position: absolute
+				right: 14%
+				top: 21%
+				width: emCalc(600)
+				background:  url(../images/icons/slider_caption_bg.png) no-repeat
+				background-size: contain
+				padding: emCalc(30)
+
+
+			&__heading
+				font-family: $LatoFont
+				font-size: emCalc(54)
+				font-weight: 300
+				padding: emCalc(5) emCalc(5)
+				color: $menu-font-color
+
+			&__separator
+				background: url(../images/icons/slider_caption_separator.png) no-repeat center
+				display: block
+				background-size: contain
+				padding: emCalc(15)
+			
+			&__link
+				position: relative
+				display: inline-block
+
+				font-family: $LatoFont
+				font-size: emCalc(23)
+				font-weight: 400
+				text-decoration: none
+				text-transform: uppercase
+				color: $menu-font-color
+				padding: emCalc(5) emCalc(10)
+
+			&__image
+				width: 100%
+
+
+.flex-control-nav
+	position: absolute
+	right: 3%
+	bottom: 3%
+	li
+		display: inline-block
+		vertical-align: middle
+		margin-left: emCalc(10)
+		
+		&:first-child
+			margin-left: 0
+
+		a
+			display: block
+			width: emCalc(10)
+			height: emCalc(10)
+			background-color: #fff
+
+			border-radius: 50%
+			cursor: pointer
+			text-indent: -999999px
+
+			&.flex-active
+				width: emCalc(18)
+				height: emCalc(18)
+				background-color: #ffb900
+
+.flex-direction-nav li
+	a
+		width: 60px
+		height: 63px
+		display: block
+		background: url(../images/icons/bg_direction_nav.png) no-repeat 0 0
+		background-size: cover;
+		position: absolute
+		top: 50%
+		cursor: pointer
+		text-indent: -9999px
+		margin: 18px 0 0
+		@include transition(0.3s, ease-in-out)
+
+	.flex-next
+		background-position: -60px 0
+		right: 0
+		opacity: 0
+	.flex-prev
+		left: 0
+		opacity: 0
+	.disabled
+		opacity: .3
+		filter: alpha(opacity = 30)
+		cursor: default
+
+	.slider:hover &
+		.flex-prev 
+			opacity: 0.7;
+			left: 10px
+			&:hover
+				opacity: 1
+		
+		.flex-next 
+			opacity: 0.7
+			right: 10px
+			&:hover
+				opacity: 1
+
+//EO slider
+
+@media only screen and (max-width: 1400px)
+	.wrapper
+		width: 1000px
+		/* Animate screen sizing */
+		transition: 0.3s ease
+	.menu-bar
+		&__item
+			&__icon
+				&--logo
+					width: 202px
+					height: 83px
+			&__value
+				font-size: emCalc(18)
+	.slider
+		margin-top: emCalc(-117)
+
+		&__list
+			&__item
+				&__content
+					right: 14%
+					top: 21%
+					width: emCalc(400)
+					padding: emCalc(20)
+					transition: 0.3s ease
+
+
+				&__heading
+					font-size: emCalc(36)
+					padding: emCalc(4) emCalc(4)
+
+				&__separator
+					padding: emCalc(10)
+				
+				&__link
+					font-size: emCalc(17)
+					padding: emCalc(4) emCalc(7)
+
+	.flex-direction-nav li
+		a
+			width: 40px
+			height: 42px
+			margin: 12px 0 0
+			@include transition(0.3s, ease-in-out)
+
+		.flex-next
+			background-position: -40px 0
+
+@media only screen and (max-width: 1200px)
+	.flex-control-nav
+		position: absolute
+		right: 3%
+		bottom: 7%
+
+
+
+@media only screen and (max-width: 1100px)
+	.header-wrap
+		position: relative
+		background: url(../images/icons/responsive_menu_bg.jpg)
+		background-repeat: round
+	.wrapper
+		width: 100%
+		/* Animate screen sizing */
+		transition: 0.3s ease
+
+	// header
+	.header
+		padding: 0
+		background: transparent;
+
+		&__navigation, &__personal-cabinet
+			display: none
+
+		&__logo
+			display: block
+			position: relative
+			float: left
+			width: 66%
+			padding: emCalc(15) 0
+
+			border-left: 1px solid
+			
+			text-align: center
+
+			box-sizing: border-box
+
+		&__menu-search
+			display: block
+			float: right
+			width: 17%
+			padding: emCalc(15) 0
+			text-align: center
+			cursor: pointer
+
+		&__menu-expand, &__menu-bar-expand
+			display: block
+			float: left
+			width: 17%
+			padding: emCalc(15) 0
+			text-align: center
+			cursor: pointer
+	//EO header
+
+	//menu bar
+	.menu-bar
+		border-bottom: none
+
+		.wrapper
+			display: block
+			@include clearfix()
+		&.js-hidden
+			display: none
+
+		&__item
+			display: inherit
+			float: left
+			box-sizing: border-box
+
+			border-top: 1px solid
+			border-color: #e4e4e4
+			width: 25%
+
+			&__value
+				font-size: emCalc(26)
+				text-overflow: ellipsis
+				white-space: nowrap
+
+				overflow: hidden
+
+			/*  Setting new width to the menu bar items  */
+			&--logo
+				display: none
+
+			&--loupe
+				display: none
+	//EO menu bar

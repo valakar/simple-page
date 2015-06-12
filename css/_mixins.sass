@@ -1,0 +1,70 @@
+/// Block Element
+/// @param {String} $element - Element's name
+@mixin element($element) 
+    &__#{$element} 
+        @content
+
+/// Block Modifier
+/// @param {String} $modifier - Modifier's name
+@mixin modifier($modifier) 
+    &--#{$modifier} 
+        @content
+
+@mixin clearfix() 
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+@mixin respond-to($media)
+  // CUSTOM QUERIES
+  // PHONES
+  @if $media == phone
+    @media only screen and (max-width : 767px)
+      @content
+    
+  // TABLETS
+  @else if $media == tablet
+    @media only screen and (min-width: 768px) and (max-width : 1024px) 
+      @content
+
+$em-base: 16px
+
+@function strip-unit($num)
+    @return $num / ($num * 0 + 1)
+
+@function emCalc($pxSize, $emSize:$em-base) 
+	$value: strip-unit($pxSize) / strip-unit($emSize) * 1em
+	@if ($value == 0em) 
+		$value: 0;
+	@return $value
+
+
+//
+// Transition
+//
+@mixin transition( $duration: 1s, $easing: ease )
+  -webkit-transition: all $duration $easing
+     -moz-transition: all $duration $easing
+      -ms-transition: all $duration $easing
+       -o-transition: all $duration $easing
+          transition: all $duration $easing
+
+//
+// Border-radius
+//
+@mixin border-radius( $radius: 5px )
+
+  -webkit-border-radius: $arguments
+     -moz-border-radius: $arguments
+          border-radius: $arguments
+
+
+//
+// Box-shadow
+//
+@mixin box-shadow( $x-axis: 0, $y-axis: 1px, $blur: 4px, $color: rgba( 0, 0, 0, 0.2 ), $inset: '' )
+
+  -webkit-box-shadow: $inset $x-axis $y-axis $blur $color
+       -o-box-shadow: $inset $x-axis $y-axis $blur $color
+          box-shadow: $inset $x-axis $y-axis $blur $color
