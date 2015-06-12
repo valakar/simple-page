@@ -1,11 +1,11 @@
-if(typeof nxte == 'undefined'){  
-	var nxte = {};
+if(typeof SimpleSite == 'undefined'){  
+	var SimpleSite = {};
 }
 
 (function($){
 	$.fn.toggleMenuBar = function(options){
 		if(!$.data(this, 'toggleMenuBar')){
-			$.data(this, 'toggleMenuBar', new nxte.toggleMenuBar(this, options));
+			$.data(this, 'toggleMenuBar', new SimpleSite.toggleMenuBar(this, options));
 		}
 		return this;
 	};
@@ -16,7 +16,7 @@ if(typeof nxte == 'undefined'){
 			, togglingClass: 'active'	
 	};
 
-	nxte.toggleMenuBar = function(options){
+	SimpleSite.toggleMenuBar = function(options){
 		this.hParam = {}; $.extend(this.hParam, $.fn.toggleMenuBar.defaults, options || {} );	
 
 		this.jControll = $(this.hParam.control);
@@ -24,17 +24,17 @@ if(typeof nxte == 'undefined'){
 		this.initEvents();
 	}
 
-	nxte.toggleMenuBar.prototype.initEvents = function(){
+	SimpleSite.toggleMenuBar.prototype.initEvents = function(){
 		this.jControll.click($.proxy(this.toggleClass, this));
 	}
 
-	nxte.toggleMenuBar.prototype.toggleClass = function(event){
+	SimpleSite.toggleMenuBar.prototype.toggleClass = function(event){
 		$(event.currentTarget).toggleClass(this.hParam.togglingClass);
 
 		this.toggleBar();
 	}
 
-	nxte.toggleMenuBar.prototype.toggleBar = function(){
+	SimpleSite.toggleMenuBar.prototype.toggleBar = function(){
 		$(this.hParam.menuBar).toggleClass('js-hidden');
 	}
 
